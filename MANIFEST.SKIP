@@ -38,3 +38,6 @@
 \.t\.log$
 
 \.prove$
+
+# XS shit
+\.(?:bs|c|o)$
