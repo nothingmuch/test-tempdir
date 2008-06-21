@@ -97,9 +97,11 @@ sub cleanup_policy_always {
 sub cleanup_policy_success {
 	my ( $self, @args ) = @_;
 
-	return if $self->failing_tests;
-
-	$self->cleanup_policy_always(@args);
+	if ( $self->failing_tests ) {
+		$self->test_builder->diag("Leaving temporary directory '" . $self->dir . "' due to test fails");
+	} else {
+		$self->cleanup_policy_always(@args);
+	}
 }
 
 __PACKAGE__
