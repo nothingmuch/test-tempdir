@@ -56,6 +56,8 @@ isa_ok( $fallback_lock, "File::NFSLock" );
 
 	isnt( $new_fb, $path, "second fallback is different from base path" );
 	isnt( $new_fb, $fallback_path, "and from first fallback path" );
+
+	rmdir $new_fb;
 }
 
 
@@ -76,3 +78,7 @@ SKIP: {
 
 	ok( -f $lockfile, "lockfile exists after ->empty" );
 }
+
+rmdir $fallback_path;
+
+
