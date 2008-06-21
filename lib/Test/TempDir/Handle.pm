@@ -112,13 +112,68 @@ __END__
 
 =head1 NAME
 
-Test::TempDir::Handle - 
+Test::TempDir::Handle - A handle for managing a temporary directory root.
 
 =head1 SYNOPSIS
 
 	use Test::TempDir::Handle;
 
+	my $h = Test::TempDir::Handle->new( dir => dir("t/tmp") );
+
+	$h->empty;
+
+	# ...
+
+	$h->cleanup; # will delete on success by default
+
 =head1 DESCRIPTION
+
+This class manages a temporary directory.
+
+=head1 ATTRIBUTES
+
+=over 4
+
+=item dir
+
+The L<Path::Class::Dir> that is being managed.
+
+=item lock
+
+An optional lock object (L<File::NFSLock>). Just kept around for reference counting.
+
+=item cleanup_policy
+
+One of C<success>, C<always> or C<never>.
+
+C<success> means that C<cleanup> deletes only if C<test_builder> says the tests
+have passed.
+
+=item test_builder
+
+The L<Test::Builder> singleton.
+
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item empty
+
+Cleans out the directory but doesn't delete it.
+
+=item delete
+
+Cleans out the directory and removes it.
+
+=item cleanup
+
+Calls C<delete> if the C<cleanup_policy> dictates to do so.
+
+This is normally called automatically at destruction.
+
+=back
 
 =cut
 
