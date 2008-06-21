@@ -47,15 +47,13 @@ sub failing_tests {
 sub empty {
 	my $self = shift;
 	return unless -d $self->dir;
-	warn "will empty " . $self->dir;
-	#$self->rmtree({ keep_root => 1 });
+	$self->rmtree({ keep_root => 1 });
 }
 
 sub delete {
 	my $self = shift;
 	return unless -d $self->dir;
-	warn "will delete " . $self->dir;
-	#$self->rmtree({ keep_root => 0 });
+	$self->rmtree({ keep_root => 0 });
 }
 
 sub release_lock {
