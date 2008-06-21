@@ -40,9 +40,7 @@ sub tempfile { File::Temp::tempfile( _template_args(@_) ) }
 
 sub scratch {
 	require Directory::Scratch;
-	my $d = Directory::Scratch->new( _temp_args, @_ );
-	$d->{CLEANUP} = 1; # make it stfu, we know what we're doing
-	return $d;
+	Directory::Scratch->new( _temp_args, @_ );
 }
 
 
