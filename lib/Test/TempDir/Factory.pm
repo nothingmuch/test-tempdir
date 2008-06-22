@@ -55,7 +55,7 @@ has options => (
 has use_subdir => (
 	isa => "Bool",
 	is  => "rw",
-	default => 0,
+	default => 1,
 );
 
 has subdir_template => (

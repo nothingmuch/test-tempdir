@@ -29,13 +29,13 @@ is( $f->base_path, $subdir, "base path" );
 
 ok( not(-d $f->base_path), "base path doesn't exist yet" );
 
-ok( !$f->use_subdir, "subdirs disabled" );
+ok( $f->use_subdir, "subdirs enabled" );
 
 my ( $path, $lock ) = $f->create_and_lock($f->base_path);
 
 isa_ok( $path, "Path::Class::Dir" );
 
-is( $path, $subdir, "preferred path used" );
+ok( $subdir->contains($path), "preferred path used" );
 
 ok( -d $path, "created" );
 
@@ -65,7 +65,9 @@ $f->lock(1);
 
 isa_ok( my $dir = $f->create, "Test::TempDir::Handle" );
 
-is( $dir->dir, $path, "dir created" );
+isa_ok( $dir->dir, "Path::Class::Dir" );
+
+ok( $subdir->contains( $dir->dir ), "created in the right place" );
 
 isa_ok( $dir->lock, "File::NFSLock" );
 
