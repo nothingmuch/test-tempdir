@@ -5,8 +5,8 @@ use strict;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-	NAME         => '',
-	VERSION_FROM => '',
+	NAME         => 'Test::TempDir',
+	VERSION_FROM => 'lib/Test/TempDir.pm',
 	INSTALLDIRS  => 'site',
 	SIGN         => 1,
 	PL_FILES     => { },
