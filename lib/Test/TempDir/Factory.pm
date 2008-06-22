@@ -39,6 +39,12 @@ has dir_name => (
 	default => sub { dir($ENV{TEST_TEMPDIR} || $ENV{TEST_TMPDIR} || "tmp") },
 );
 
+has cleanup_policy => (
+	isa => "Str",
+	is  => "rw",
+	default => sub { $ENV{TEST_TEMPDIR_CLEANUP} || "success" },
+);
+
 has t_dir => (
 	isa => Dir,
 	is  => "rw",
@@ -85,6 +91,7 @@ sub create {
 	my $h = $self->new_handle(
 		dir => $path,
 		( defined($lock) ? ( lock => $lock ) : () ),
+		cleanup_policy => $self->cleanup_policy,
 		@args,
 	);
 

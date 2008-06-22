@@ -12,7 +12,7 @@ use ok 'Test::TempDir::Factory';
 
 my $tmp = dir( tempdir( CLEANUP => 1 ) );
 
-delete @ENV{qw(TEST_TEMPDIR TEST_TMPDIR)};
+delete @ENV{qw(TEST_TEMPDIR TEST_TMPDIR TEST_TEMPDIR_CLEANUP)};
 
 my $f = Test::TempDir::Factory->new;
 
