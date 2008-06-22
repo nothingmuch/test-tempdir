@@ -195,18 +195,95 @@ __END__
 
 =head1 NAME
 
-Test::TempDir - Temporary files for tests 
+Test::TempDir::Factory - A factory for creating L<Test::TempDir::Handle>
+objects.
 
 =head1 SYNOPSIS
 
-	use Test::TempDir;
+	my $f = Test::TempDir::Factory->new;
+
+	my $d = $f->create;
+
+	$d->empty;
+
+	# ...
+
+	$d->cleanup
 
 =head1 DESCRIPTION
 
-=head1 SEE ALSO
+This class creates L<Test::TempDir::Handle> objects with the right C<dir>
+parameter, taking care of obtaining locks, creating directories, and handling
+fallback logic.
 
-L<File::Temp>, L<Directory::Scratch>, L<Path::Class>
+=head1 ATTRIBUTES
+
+=over 4
+
+=item lock
+
+Whether or not to enable locking.
+
+Defaults to true.
+
+=item lock_opts
+
+A hash reference to pass to L<File::NFSLock>.
+
+Defaults to C<NONBLOCKING>
+
+=item lock_attempts
+
+How many times to try to create and lock a dir.
+
+Defaults to 2.
+
+=item dir_name
+
+The directory under C<t_dir> to use.
+
+Defaults to C<tmp>
+
+=item t_dir
+
+Defaults to C<t>
+
+=item use_subdir
+
+Whether to always use a temporary subdirectory under the temporary root.
+
+This means that with a C<success> cleanup policy all failures are retained.
+
+When disabled, C<t/tmp> will be used directly as C<temp_root>.
+
+Defaults to true.
+
+=item subdir_template
+
+The template to pass to C<tempdir>. Defaults to C<File::Temp::TEMPXXX>.
+
+=item handle_class
+
+Defaults to L<Test::TempDir::Handle>.
+
+=item verbose
+
+Whether or not to C<carp> diagnostics when falling back.
+
+If you subclass this factory and add a C<logger> method a la L<MooseX::Logger>
+then this parameter is ignored and all messages will be C<warn>ed on the
+logger.
+
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item create
+
+Create a L<Test::TempDir::Handle> object with a proper C<dir> attribute.
+
+=back
 
 =cut
-
-
