@@ -150,7 +150,7 @@ sub try_lock {
 
 sub make_subdir {
 	my ( $self, $dir ) = @_;
-
+	$dir->mkpath unless -d $dir;
 	dir( File::Temp::tempdir( $self->subdir_template, DIR => $dir->stringify ) );
 }
 
