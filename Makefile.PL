@@ -15,6 +15,7 @@ WriteMakefile(
 		'File::Path' => 0,
 		'File::Spec' => 0,
 		'File::Temp' => 0,
+		'File::NFSLock' => 0,
 		'Moose' => '0.50',
 		'MooseX::Types::Path::Class' => 0,
 		'Path::Class' => 0,
