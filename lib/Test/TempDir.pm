@@ -36,7 +36,7 @@ sub _template_args {
 	}
 }
 
-sub tempdir { File::Temp::tempdir( _optional_template_args(@_) ) }
+sub tempdir { File::Temp::tempdir( _template_args(@_) ) }
 
 sub tempfile { File::Temp::tempfile( _template_args(@_) ) }
 
