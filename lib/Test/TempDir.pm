@@ -5,6 +5,8 @@ package Test::TempDir;
 use strict;
 use warnings;
 
+our $VERSION = "0.01";
+
 use File::Temp ();
 
 use Test::TempDir::Factory;
