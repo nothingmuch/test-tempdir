@@ -3,7 +3,13 @@
 use strict;
 use warnings;
 
-use Test::More 'no_plan';
+use Test::More;
+
+BEGIN {
+	use File::Spec;
+	plan skip_all => "No writable temp dir" unless grep { -d && -w } File::Spec->tmpdir;
+	plan 'no_plan';
+}
 
 use ok 'Test::TempDir' => qw(temp_root scratch tempfile);
 

@@ -3,15 +3,25 @@
 use strict;
 use warnings;
 
-use Test::More 'no_plan';
+use Test::More;
 
 use Path::Class;
 use File::Temp qw(tempdir);
 use File::Path;
 
-use ok 'Test::TempDir::Handle';
+my $tmp;
 
-my $tmp = dir( tempdir( CLEANUP => 1 ) );
+BEGIN {
+	use File::Spec;
+
+	plan skip_all => "No writable temp dir" unless grep { -d && -w } File::Spec->tmpdir;
+	$tmp = dir( tempdir( CLEANUP => 1 ) );
+	plan skip_all => "couldn't create temp dir" unless -d $tmp && -w $tmp;
+
+	plan 'no_plan';
+}
+
+use ok 'Test::TempDir::Handle';
 
 isa_ok( my $h = Test::TempDir::Handle->new( dir => $tmp ), "Test::TempDir::Handle" );
 
