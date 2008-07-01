@@ -12,7 +12,7 @@ WriteMakefile(
 	PL_FILES     => { },
 	PREREQ_PM    => {
 		'Test::use::ok' => 0,
-		'File::Path' => 0,
+		'File::Path' => '2.04', # reliable keep_root
 		'File::Spec' => 0,
 		'File::Temp' => 0,
 		'File::NFSLock' => 0,
