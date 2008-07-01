@@ -15,6 +15,8 @@ use ok 'Test::TempDir' => qw(temp_root scratch tempfile);
 
 isa_ok( my $root = temp_root, "Path::Class::Dir" );
 
+ok( -d $root, "root exists" );
+
 ok( my ( $fh, $file ) = tempfile(), "tempfile" );
 
 ok( $fh, "file handle returned" );
