@@ -61,7 +61,7 @@ has options => (
 has use_subdir => (
 	isa => "Bool",
 	is  => "rw",
-	default => 1,
+	default => sub { $ENV{TEST_TEMPDIR_USE_SUBDIR} ? 1 : 0 },
 );
 
 has subdir_template => (

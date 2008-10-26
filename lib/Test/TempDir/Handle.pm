@@ -54,6 +54,7 @@ sub delete {
 	my $self = shift;
 	return unless -d $self->dir;
 	$self->rmtree({ keep_root => 0 });
+	$self->dir->parent->remove; # rmdir, safe, and we don't care about errors
 }
 
 sub release_lock {
